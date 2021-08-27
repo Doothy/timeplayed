@@ -24,33 +24,37 @@ public class CommandTimePlayed extends CommandBase {
     @Override
     public void execute(MinecraftServer server, ICommandSender sender, String[] arguments) throws CommandException {
         //Check if command is sent by a player
-        if(sender instanceof EntityPlayerMP){
-            //Casting to EntityPlayer so we can grab statistical data from a player Object, instead of an ICommandSender
-            EntityPlayerMP player = (EntityPlayerMP) sender;
-            //Reading playtime in ticks
-            long time = player.getStatFile().readStat(StatList.PLAY_ONE_MINUTE);
-            //time in seconds
-            time = time / 20;
-            //time in minutes
-            if(time >= 60) {
-                time = time / 60;
-                //time in hours
-                if (time >= 60){
+        if(sender instanceof EntityPlayerMP) {
+            if(PermissionUtils.canUse("timeplayed.command.timep", sender)) {
+                //Casting to EntityPlayer so we can grab statistical data from a player Object, instead of an ICommandSender
+                EntityPlayerMP player = (EntityPlayerMP) sender;
+                //Reading playtime in ticks
+                float time = player.getStatFile().readStat(StatList.PLAY_ONE_MINUTE);
+                //time in seconds
+                time = time / 20;
+                //time in minutes
+                if (time >= 60) {
                     time = time / 60;
-                    //time in days
-                    if(time >= 24){
-                        time = time / 24;
-                        player.sendMessage(new TextComponentString("You have played for " + time + " days!"));
+                    //time in hours
+                    if (time >= 60) {
+                        time = time / 60;
+                        //time in days
+                        if (time >= 24) {
+                            time = time / 24;
+                            player.sendMessage(new TextComponentString("You have played for " + time + " days!"));
+                        } else{
+                            player.sendMessage(new TextComponentString("You have played for " + time + " hours!"));
+                        }
                     } else{
-                        player.sendMessage(new TextComponentString("You have played for " + time + " hours!"));
+                        player.sendMessage(new TextComponentString("You have played for " + time + " minutes!"));
                     }
                 } else{
-                    player.sendMessage(new TextComponentString("You have played for " + time + " minutes!"));
+                    player.sendMessage(new TextComponentString("You have played for " + time + " seconds!"));
                 }
             } else{
-                player.sendMessage(new TextComponentString("You have played for " + time + " seconds!"));
+                sender.sendMessage(new TextComponentString("You have no permission to use this command! Baka!"));
             }
-        } else {
+        } else{
             sender.sendMessage(new TextComponentString("Command is not intended for Console usage!"));
         }
     }
