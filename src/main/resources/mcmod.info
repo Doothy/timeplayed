@@ -1,0 +1,18 @@
+[
+  {
+    "modid": "timeplayed",
+    "name": "Timeplayed",
+    "description": "adds /timep <Playername>, fetching the total playtime of a player on the server",
+    "version": "${version}",
+    "mcversion": "${mcversion}",
+    "url": "",
+    "updateUrl": "",
+    "authorList": [
+      "Death"
+    ],
+    "credits": "",
+    "logoFile": "",
+    "screenshots": [],
+    "dependencies": []
+  }
+]
