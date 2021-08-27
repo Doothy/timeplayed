@@ -5,10 +5,9 @@ import net.minecraft.command.CommandException;
 import net.minecraft.command.ICommandSender;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.server.MinecraftServer;
-import net.minecraft.stats.StatBase;
-import net.minecraft.stats.StatBasic;
 import net.minecraft.stats.StatList;
 import net.minecraft.util.text.TextComponentString;
+import gg.oddysian.death.timeplayed.commands.permissions.PermissionUtils;
 
 // Later on I want to try and add a Username as parameter
 public class CommandTimePlayed extends CommandBase {
